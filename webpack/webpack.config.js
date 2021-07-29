@@ -6,7 +6,6 @@ const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env, argv) => {
-  console.log(88888, env, argv)
   return {
     // 模式，2种：生产模式(production)和开发模式(development)
     // 开发模式不压缩打包后代码，生产模式压缩打包后代码
@@ -108,9 +107,9 @@ module.exports = (env, argv) => {
     externals: { // 外部依赖，不打包，而是在运行时再从外部获取, 一些CDN包
       jquery: 'jQuery'
     },
-    performance: { // 控制webpack如何通过[资源asset和入口起点超过指定文件限制]
-      hints: 'error' , // 例如一个超过250K大的资源就给你一个警告，一般在开发环境
-    },
+    // performance: { // 控制webpack如何通过[资源asset和入口起点超过指定文件限制]
+    //   hints: 'error' , // 例如一个超过250K大的资源就给你一个警告，一般在开发环境
+    // },
     node: false, // 默认
   };
 }
