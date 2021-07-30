@@ -22,25 +22,25 @@ module.exports = (env, argv) => {
     },
     // 优化配置，虽然webpack4开始，会根据你选择的mode来执行不同的优化，
     // 不过所有的优化还是可以手动配置和重写。
-    optimization: {
-      // splitChunks: { // 用于将模块分离到单独的 bundle 中。
-      //   chunks: 'all',
-      // },
-      splitChunks: {
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
-          },
-        },
-      },
-      // 模块标识符 保证你只处理你改动的文件的hash
-      moduleIds: 'deterministic',
-      // 将其设置为 single 来为所有 chunk 创建一个 runtime bundle：
-      // 例如多个页面引入loadsh，防止重复，生成runtime.bundle.js，命中缓存消除请求，
-      runtimeChunk: 'single',
-    },
+    // optimization: {
+    //   // splitChunks: { // 用于将模块分离到单独的 bundle 中。
+    //   //   chunks: 'all',
+    //   // },
+    //   splitChunks: {
+    //     cacheGroups: {
+    //       vendor: {
+    //         test: /[\\/]node_modules[\\/]/,
+    //         name: 'vendors',
+    //         chunks: 'all',
+    //       },
+    //     },
+    //   },
+    //   // 模块标识符 保证你只处理你改动的文件的hash
+    //   moduleIds: 'deterministic',
+    //   // 将其设置为 single 来为所有 chunk 创建一个 runtime bundle：
+    //   // 例如多个页面引入loadsh，防止重复，生成runtime.bundle.js，命中缓存消除请求，
+    //   runtimeChunk: 'single',
+    // },
     // 选择一种source map格式来增强调试过程。不同得值会明显影响到构建和重新构建的速度
     // 看我链接去那里 https://www.cnblogs.com/axl234/p/6500534.html
     devtool: 'eval-source-map',
