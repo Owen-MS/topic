@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "//": "等价于npx webpack --config webpack.config.js",
-    "build": "webpack",
+    "build": "webpack-dashboard webpack",
     "watch": "webpack --watch",
     "start": "webpack serve --open"
   },
@@ -24,6 +24,7 @@
     "style-loader": "^3.2.1",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.2",
+    "webpack-dashboard": "^3.3.5",
     "webpack-dev-server": "^3.11.2",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-manifest-plugin": "^3.2.0",
