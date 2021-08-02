@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "//": "等价于npx webpack --config webpack.config.js",
-    "build": "webpack-dashboard webpack",
+    "build": "webpack --mode=none",
     "watch": "webpack --watch",
     "start": "webpack serve --open"
   },
@@ -23,6 +23,7 @@
     "mini-css-extract-plugin": "^2.1.0",
     "style-loader": "^3.2.1",
     "webpack": "^5.38.1",
+    "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^4.7.2",
     "webpack-dashboard": "^3.3.5",
     "webpack-dev-server": "^3.11.2",

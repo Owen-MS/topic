@@ -66,10 +66,93 @@ export default {
 };
 ```
 ### 4、提前构建
-配置`DLLPlugin`**将第三方依赖提前**
+配置`DLLPlugin`**将第三方依赖提前打包**，好处是<font color=#FF6A6A>将DLL将业务代码完全分离且每次只构建
+业务代码。</font>这是一个古老的配置，在`webpack v2`时已经存在，不过现在`webpack v4+`已不推荐使用该配置，
+因为其版本带来的性能提升足以忽略`DllPlugin`所带来的收益。
+
+`DLL`意为`Dynamic Link Library`<font color=#FF6A6A>动态链接库</font>，指一个包含可由多个程序同时使用的
+代码库。在前端领域可认为时另类缓存的存在，它把公共代码打包为DLL文件并存到硬盘里，再次打包时动态链接`DLL文件`
+就无需再次打包那些公共代码，从而提升构建速度
+
+可手动配置或者采用[autodll-webpack-plugin](https://github.com/asfktz/autodll-webpack-plugin)
+代替手动配置
+```js
+plugins: [
+  new HtmlWebpackPlugin({
+    inject: true,
+    template: './src/index.html',
+  }),
+  new AutoDllPlugin({
+    inject: true, // will inject the DLL bundles to index.html
+    debug: true,
+    filename: '[name]_[hash].js',
+    path: './dll',
+    entry: {
+      vendor: [
+        'react',
+        'react-dom'
+      ]
+    }
+  })
+]
+```
+### 5、并行构建
+
+**配置Thread将Loader单进程转换为多进程，** 好处是<font color=#FF6A6A>释放CPU多核并发的优势</font>。
+在使用webpack构建项目时会有大量文件需解析和处理，构建过程中是计算密集型的操作，随着文件增多会使构建过程变得越慢。
+
+运行在`Node`里的`webpack`是单线程模型，简单来说就是`webpack`待处理的任务需一件件处理，不能同一时刻处理多件任务。
+
+`文件读写`与`计算操作`是无法避免的，能不能让`webpack`同一时刻处理多个任务，发挥多核`CPU`电脑的威力以
+提升构建速度呢？[thread-loader](https://github.com/webpack-contrib/thread-loader)来帮你，根据CPU
+个数开启线程
+
+在此需注意一个问题，若项目文件不算多就不要使用该性能优化建议，毕竟开启多个线程也会存在性能开销。
+
+```js
+import Os from "os";
+
+export default {
+    // ...
+    module: {
+        rules: [{
+            // ...
+            test: /\.js$/,
+            use: [{
+                loader: "thread-loader",
+                options: { workers: Os.cpus().length }
+            }, {
+                loader: "babel-loader",
+                options: { cacheDirectory: true }
+            }]
+        }]
+    }
+};
+```
+
+### 6、可视结构
+
+**配置BundleAnalyzer分析打包文件结构，** 好处是<font color=#FF6A6A>找出体积过大的原因。</font>
+从而通过分析原因得出优化方案减少构建时间。<font color=#FF6A6A>BundleAnalyzer</font>是`webpack`官方
+插件，可直观分析打包文件的模块组成部分、模块的体积占比、模块包含关系、模块依赖关系、文件是否重复、压缩体积对比等
+可视化数据。
+可使用[webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer) 配置，有了它，我们就能快速找到相关问题。
+```js
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+
+export default {
+    // ...
+    plugins: [
+        // ...
+        BundleAnalyzerPlugin()
+    ]
+};
+```
 
 
-## 减少打包体积 分割代码 摇树优化 动态垫片 按需加载 作用提升 压缩资源
+
+
+## 减少打包体积  分割代码 摇树优化 动态垫片 按需加载 作用提升 压缩资源
 
 ### 1、分割代码
 **分割各个模块代码，提取相同部分代码，，** 好处是 <font color=#FF6A6A>减少重复代卖出现的频率。</font>

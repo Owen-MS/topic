@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'); // 生成一个html
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 // 将css独立成一个文件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const DashboardPlugin = require("webpack-dashboard/plugin");
+// const DashboardPlugin = require("webpack-dashboard/plugin");
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = (env, argv) => {
   return {
@@ -78,7 +79,8 @@ module.exports = (env, argv) => {
       ]
     },
     plugins: [
-      new DashboardPlugin(),
+      // new BundleAnalyzerPlugin(),
+      // new DashboardPlugin(),
       new HtmlWebpackPlugin({
         title: 'Output Management',
       }),
