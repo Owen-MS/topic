@@ -56,7 +56,7 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css' // 这里也可以使用 [hash]
-    }), // 将 css 文件单独抽离的 plugin
+    }), // 将 css 文件单独抽离的 plugins
   ],
 
   resolve: {

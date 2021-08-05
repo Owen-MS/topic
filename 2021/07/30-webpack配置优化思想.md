@@ -344,7 +344,7 @@ const Logon = () => import( /* webpackChunkName: "logon" */ "../../views/logon")
         // ...
         "plugins": [
             // ...
-            "@babel/plugin-syntax-dynamic-import"
+            "@babel/plugins-syntax-dynamic-import"
         ]
     }
 }
@@ -409,9 +409,9 @@ export default {
 - [uglifyjs-webpack-plugin](https://github.com/webpack-contrib/uglifyjs-webpack-plugin)：压缩ES5版本的JS代码
 - [terser-webpack-plugin](https://github.com/webpack-contrib/terser-webpack-plugin)：压缩ES6版本的JS代码
 ```js
-import OptimizeCssAssetsPlugin from "optimize-css-assets-webpack-plugin";
-import TerserPlugin from "terser-webpack-plugin";
-import UglifyjsPlugin from "uglifyjs-webpack-plugin";
+import OptimizeCssAssetsPlugin from "optimize-css-assets-webpack-plugins";
+import TerserPlugin from "terser-webpack-plugins";
+import UglifyjsPlugin from "uglifyjs-webpack-plugins";
 
 const compressOpts = type => ({
     cache: true, // 缓存文件
@@ -442,7 +442,7 @@ export default {
 [图片压缩](https://tinypng.com/)
 [tinyimg-webpack-plugin](https://github.com/JowayYoung/tinyimg-webpack-plugin)
 ```js
-import TinyimgPlugin from "tinyimg-webpack-plugin";
+import TinyimgPlugin from "tinyimg-webpack-plugins";
 
 export default {
     // ...

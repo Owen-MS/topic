@@ -26,12 +26,6 @@ function component() {
 
 document.body.appendChild(component());
 
-
-function add() {
-  console.log(8999);
-}
-add();
-
 // if (module.hot) {
 //   module.hot.accept('./print.js', function() {
 //     console.log('Accepting the updated printMe module!');
